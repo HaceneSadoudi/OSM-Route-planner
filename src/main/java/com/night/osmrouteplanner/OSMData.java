@@ -15,6 +15,19 @@ public class OSMData {
     /** Directory where xml files will be stored */
     public static final String DIRNAME = "OSMData";
 
+    /**
+     * Send a http request to Overpass API then return the response
+     * @param  overpassQuery      Overpass query
+     * @throws IOException
+     * @return http response as a String
+     */
+    public static String sendRequest(String overpassQuery) throws IOException {
+        URL url = new URL(API_ENDPOINT+overpassQuery);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        InputStream inputStream = con.getInputStream();
+        Scanner s = new Scanner(inputStream);
+        return s.useDelimiter("\\A").next();
+    }
 
 
     /**
