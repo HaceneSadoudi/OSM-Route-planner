@@ -1,11 +1,10 @@
 package com.night.osmrouteplanner;
 
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Scanner;
 
 public class OSMData {
@@ -22,7 +21,8 @@ public class OSMData {
      * @return http response as a String
      */
     public static String sendRequest(String overpassQuery) throws IOException {
-        URL url = new URL(API_ENDPOINT+overpassQuery);
+        overpassQuery = URLEncoder.encode(overpassQuery, "UTF8");
+        URL url = new URL(API_ENDPOINT+"?data="+overpassQuery);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         InputStream inputStream = con.getInputStream();
         Scanner s = new Scanner(inputStream);
@@ -37,6 +37,26 @@ public class OSMData {
     public static void mkCityDir(String city) {
         File dir = new File(DIRNAME+File.separator+city);
         if(!dir.exists()) dir.mkdirs();
+    }
+
+
+    /**
+     * Create a new file then write the given string content to it
+     *
+     * @param   content     a given string to write to a file
+     * @param   filename    the name of the created file
+     * @param   ext         the file extension
+     */
+    public static void stringToFile(String content, String filename, String ext) {
+        try {
+            File file = new File(filename + ext);
+            file.createNewFile();
+            BufferedWriter bwr = new BufferedWriter(new FileWriter(file.getAbsolutePath()));
+            bwr.write(content);
+            bwr.close();
+        }catch(IOException e) {
+            System.out.println(e);
+        }
     }
 
 }
