@@ -38,6 +38,33 @@ public class AutoCompleteTF extends TextField {
 
 
     /**
+     * populate created items on the ContextMenu
+     * @param searchRes     List of founded strings that matches the search
+     */
+    private void populateItems(List<String> searchRes) {
+        List<CustomMenuItem> menuItems = new LinkedList<>();
+
+        int count = Math.min(MAX_ITEMS, searchRes.size());
+        for(int i=0;i<count;i++) {
+            String result = searchRes.get(i);
+            Label label = new Label(result);
+            label.setPrefWidth(getPrefWidth() - 50);
+            CustomMenuItem item = new CustomMenuItem(label);
+            menuItems.add(item);
+            item.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    setText(result);
+                    contextMenuPopup.hide();
+                }
+            });
+        }
+        contextMenuPopup.getItems().clear();
+        contextMenuPopup.getItems().addAll(menuItems);
+    }
+
+
+    /**
      * Read all cities from CSV file and insert them inside a SortedSet
      * @param file      CVS file
      */
