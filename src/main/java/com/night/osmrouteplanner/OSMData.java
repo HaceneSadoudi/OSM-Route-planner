@@ -14,6 +14,13 @@ public class OSMData {
     /** Directory where xml files will be stored */
     public static final String DIRNAME = "OSMData";
 
+    public static double CityNorthLimit;
+    public static double CityEastLimit;
+    public static double CitySouthLimit;
+    public static double CityWestLimit;
+
+    public final static double AREA_RANG = 0.05;
+
     /**
      * Send a http request to Overpass API then return the response
      * @param  overpassQuery      Overpass query
@@ -57,6 +64,33 @@ public class OSMData {
         }catch(IOException e) {
             System.out.println(e);
         }
+    }
+
+    /**
+     * Get the city coordinates from the csv file
+     *
+     * @param city      name of the city that the user chooses
+     */
+    public static void getCityCoordinates(String city) {
+        double lat = 0, lon = 0;
+        try {
+            File file  = new File("fr.csv");
+            Scanner sc = new Scanner(file, "UTF-8");
+            while(sc.hasNextLine()) {
+                String[] line = sc.nextLine().split(",");
+                if(line[0].contains(city)) {
+                    lat = Double.parseDouble(line[1]);
+                    lon = Double.parseDouble(line[2]);
+                    break;
+                }
+            }
+        }catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
+        CityNorthLimit = lat + AREA_RANG;
+        CitySouthLimit = lat - AREA_RANG;
+        CityEastLimit  = lon + AREA_RANG;
+        CityWestLimit  = lon - AREA_RANG;
     }
 
 }
