@@ -33,19 +33,38 @@ public class AutoCompleteTF extends TextField {
             }
         });
         contextMenuPopup = new ContextMenu();
+        readCitiesFromCSV(new File("fr.csv"));
+        textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                if (getText().length() == 0) {
+                    contextMenuPopup.hide();
+                } else {
+                    LinkedList<String> matches = new LinkedList<>(entries.subSet(getText(), getText() + Character.MAX_VALUE));
+                    if (matches.size() > 0) {
+                        populateItems(matches);
+                        if (!contextMenuPopup.isShowing())
+                            contextMenuPopup.show(AutoCompleteTF.this, Side.BOTTOM, 0, 0);
+                    } else {
+                        contextMenuPopup.hide();
+                    }
 
+                }
+            }
+        });
     }
 
 
     /**
      * populate created items on the ContextMenu
-     * @param searchRes     List of founded strings that matches the search
+     *
+     * @param searchRes List of founded strings that matches the search
      */
     private void populateItems(List<String> searchRes) {
         List<CustomMenuItem> menuItems = new LinkedList<>();
 
         int count = Math.min(MAX_ITEMS, searchRes.size());
-        for(int i=0;i<count;i++) {
+        for (int i = 0; i < count; i++) {
             String result = searchRes.get(i);
             Label label = new Label(result);
             label.setPrefWidth(getPrefWidth() - 50);
@@ -66,17 +85,18 @@ public class AutoCompleteTF extends TextField {
 
     /**
      * Read all cities from CSV file and insert them inside a SortedSet
-     * @param file      CVS file
+     *
+     * @param file CVS file
      */
     public void readCitiesFromCSV(File file) {
         try {
             Scanner sc = new Scanner(file);
 
-            while(sc.hasNextLine()) {
+            while (sc.hasNextLine()) {
                 String line = sc.nextLine().split(",")[0];
                 entries.add(line);
             }
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println(e);
         }
     }
