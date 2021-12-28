@@ -37,5 +37,22 @@ public class AutoCompleteTF extends TextField {
     }
 
 
+    /**
+     * Read all cities from CSV file and insert them inside a SortedSet
+     * @param file      CVS file
+     */
+    public void readCitiesFromCSV(File file) {
+        try {
+            Scanner sc = new Scanner(file);
+
+            while(sc.hasNextLine()) {
+                String line = sc.nextLine().split(",")[0];
+                entries.add(line);
+            }
+        }catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
+    }
+
 
 }
