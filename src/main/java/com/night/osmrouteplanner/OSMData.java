@@ -101,6 +101,24 @@ public class OSMData {
                             ")";
     }
 
+    /**
+     * Get the city limits (latitude - longitude)
+     *
+     * @param city      Name of the city
+     * @return          Array with S-W-N-E limits
+     */
+    public static double[] getCityLimits(String city) {
+        // get the city coordinates
+        getCityCoordinates(city);
+        // Create the directory in which XML files will be stored
+        mkCityDir(city);
 
-
+        double[] cityLimits = {
+                                citySouthLimit,
+                                cityWestLimit,
+                                cityNorthLimit,
+                                cityEastLimit
+                              };
+        return cityLimits;
+    }
 }
