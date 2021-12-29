@@ -121,4 +121,23 @@ public class OSMData {
                               };
         return cityLimits;
     }
+
+
+
+    /**
+     * Generate Road.xml file containing a query result
+     *
+     * @param  city     Name of the city
+     */
+    public static void generateRoads(String city) throws IOException {
+        String query = "[out:xml];"
+                + "("
+                + "  way[\"highway\"]" + cityDelimitation + ";"
+                + "  relation[\"highway\"]" + cityDelimitation + ";"
+                + ");"
+                + "out geom qt;";
+        System.out.println(query);
+        mkCityDir(city);
+        stringToFile(sendRequest(query), DIRNAME+File.separator+city+File.separator+"Roads", ".xml");
+    }
 }
