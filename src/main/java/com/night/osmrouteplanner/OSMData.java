@@ -14,10 +14,11 @@ public class OSMData {
     /** Directory where xml files will be stored */
     public static final String DIRNAME = "OSMData";
 
-    public static double CityNorthLimit;
-    public static double CityEastLimit;
-    public static double CitySouthLimit;
-    public static double CityWestLimit;
+    public static double cityNorthLimit;
+    public static double cityEastLimit;
+    public static double citySouthLimit;
+    public static double cityWestLimit;
+    public static String cityDelimitation;
 
     public final static double AREA_RANG = 0.05;
 
@@ -87,10 +88,19 @@ public class OSMData {
         }catch (FileNotFoundException e) {
             System.out.println(e);
         }
-        CityNorthLimit = lat + AREA_RANG;
-        CitySouthLimit = lat - AREA_RANG;
-        CityEastLimit  = lon + AREA_RANG;
-        CityWestLimit  = lon - AREA_RANG;
+        cityNorthLimit = lat + AREA_RANG;
+        citySouthLimit = lat - AREA_RANG;
+        cityEastLimit  = lon + AREA_RANG;
+        cityWestLimit  = lon - AREA_RANG;
+
+        cityDelimitation = "(" +
+                                citySouthLimit + ", " +
+                                cityWestLimit + ", " +
+                                cityNorthLimit + ", " +
+                                cityEastLimit +
+                            ")";
     }
+
+
 
 }
