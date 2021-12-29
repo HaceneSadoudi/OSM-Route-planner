@@ -28,15 +28,20 @@ public class OSMData {
      * @throws IOException
      * @return http response as a String
      */
-    public static String sendRequest(String overpassQuery) throws IOException {
-        overpassQuery = URLEncoder.encode(overpassQuery, "UTF8");
-        URL url = new URL(API_ENDPOINT+"?data="+overpassQuery);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        InputStream inputStream = con.getInputStream();
-        Scanner s = new Scanner(inputStream);
-        String res = s.useDelimiter("\\A").next();
-        inputStream.close();
-        s.close();
+    public static String sendRequest(String overpassQuery){
+        String res = "";
+        try {
+            overpassQuery = URLEncoder.encode(overpassQuery, "UTF8");
+            URL url = new URL(API_ENDPOINT+"?data="+overpassQuery);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            InputStream inputStream = con.getInputStream();
+            Scanner s = new Scanner(inputStream);
+            res = s.useDelimiter("\\A").next();
+            inputStream.close();
+            s.close();
+        }catch(IOException e) {
+            System.out.println(e);
+        }
         return res;
     }
 
@@ -133,14 +138,13 @@ public class OSMData {
      *
      * @param  city     Name of the city
      */
-    public static void generateRoads(String city) throws IOException {
+    public static void generateRoads(String city) {
         String query = "[out:xml];"
                 + "("
                 + "  way[\"highway\"]" + cityDelimitation + ";"
                 + "  relation[\"highway\"]" + cityDelimitation + ";"
                 + ");"
                 + "out geom qt;";
-        System.out.println(query);
         mkCityDir(city);
         stringToFile(sendRequest(query), DIRNAME+File.separator+city+File.separator+"Roads", ".xml");
     }
