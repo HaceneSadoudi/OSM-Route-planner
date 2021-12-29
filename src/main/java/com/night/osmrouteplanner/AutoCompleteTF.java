@@ -96,6 +96,7 @@ public class AutoCompleteTF extends TextField {
                 String line = sc.nextLine().split(",")[0];
                 entries.add(line);
             }
+            sc.close(); // Clean up Scanner
         } catch (FileNotFoundException e) {
             System.out.println(e);
         }

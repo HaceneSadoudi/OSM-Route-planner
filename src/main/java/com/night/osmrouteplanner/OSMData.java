@@ -34,7 +34,10 @@ public class OSMData {
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         InputStream inputStream = con.getInputStream();
         Scanner s = new Scanner(inputStream);
-        return s.useDelimiter("\\A").next();
+        String res = s.useDelimiter("\\A").next();
+        inputStream.close();
+        s.close();
+        return res;
     }
 
 
@@ -85,6 +88,7 @@ public class OSMData {
                     break;
                 }
             }
+            sc.close(); // Clean up Scanner
         }catch (FileNotFoundException e) {
             System.out.println(e);
         }
