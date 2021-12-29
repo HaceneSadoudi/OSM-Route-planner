@@ -148,4 +148,15 @@ public class OSMData {
         mkCityDir(city);
         stringToFile(sendRequest(query), DIRNAME+File.separator+city+File.separator+"Roads", ".xml");
     }
+
+    public static void generateBuildings(String city) {
+        String query = "[out:xml];"
+                + "("
+                + "  way[\"building\"]" + cityDelimitation + ";"
+                + "  relation[\"building\"]" + cityDelimitation + ";"
+                + ");"
+                + "out geom qt;";
+        mkCityDir(city);
+        stringToFile(sendRequest(query), DIRNAME + File.separator + city + File.separator + "Buildings", ".xml");
+    }
 }
