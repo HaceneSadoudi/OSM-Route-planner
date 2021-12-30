@@ -201,4 +201,33 @@ public class OSMData {
         mkCityDir(city);
         stringToFile(sendRequest(query), DIRNAME + File.separator + city + File.separator + "Parks", ".xml");
     }
+
+
+    /**
+     * Generate InterestingNodes.xml file containing a query result
+     *
+     * @param city      Name of the city
+     */
+    public static void generateInterestingNodes(String city) {
+        String query =  "[out:xml];"
+                        + "("
+                        + " ("
+                        + "     node[\"amenity\"~\"^hospital|casino|cinema|courthouse|place_of_worship|police|prison|townhall|library|school$\"]" + cityDelimitation + ";"
+                        + "     way[\"amenity\"~\"^hospital|casino|cinema|courthouse|place_of_worship|police|prison|townhall|library|school$\"]" + cityDelimitation + ";"
+                        + "     relation[\"amenity\"~\"^hospital|casino|cinema|courthouse|place_of_worship|police|prison|townhall|library|school$\"]" + cityDelimitation + ";"
+                        + " );"
+                        + " ("
+                        + "     node[\"building\"~\"^civic|public|university$\"]" + cityDelimitation + ";"
+                        + "     way[\"building\"~\"^civic|public|university$\"]" + cityDelimitation + ";"
+                        + "     relation[\"building\"~\"^civic|public|university$\"]" + cityDelimitation + ";"
+                        + " );"
+                        + ");"
+                        + "out geom qt;";
+        mkCityDir(city);
+        stringToFile(sendRequest(query), DIRNAME + File.separator + city + File.separator + "InterestingNodes", ".xml");
+    }
+
+
 }
+
+
