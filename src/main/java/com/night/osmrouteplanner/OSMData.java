@@ -148,7 +148,11 @@ public class OSMData {
         mkCityDir(city);
         stringToFile(sendRequest(query), DIRNAME+File.separator+city+File.separator+"Roads", ".xml");
     }
-
+    /**
+     * Generate Buildings.xml file containing a query result
+     *
+     * @param  city     Name of the city
+     */
     public static void generateBuildings(String city) {
         String query = "[out:xml];"
                 + "("
