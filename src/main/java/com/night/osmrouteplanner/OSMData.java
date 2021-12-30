@@ -185,4 +185,20 @@ public class OSMData {
         mkCityDir(city);
         stringToFile(sendRequest(query), DIRNAME + File.separator + city + File.separator + "Water", ".xml");
     }
+
+    /**
+     * Generate Water.xml file containing a query result
+     *
+     * @param city      Name of the city
+     */
+    public static void generateParks(String city) {
+        String query =  "[out:xml];"
+                        + "("
+                        + "way[\"leisure\"~\"^(garden|park|golf_course|pitch|playground)$\"]" + cityDelimitation + ";"
+                        + "relation[\"leisure\"~\"^(garden|park|golf_course|pitch|playground)$\"]" + cityDelimitation + ";"
+                        + ");"
+                        + "out geom qt;";
+        mkCityDir(city);
+        stringToFile(sendRequest(query), DIRNAME + File.separator + city + File.separator + "Parks", ".xml");
+    }
 }
