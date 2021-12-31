@@ -72,8 +72,8 @@ public class Pencil {
 
     /**
      * Draw the buildings contour
-     * @param lon
-     * @param lat
+     * @param lon       array of coordinates X
+     * @param lat       array of coordinates Y
      */
     private void drawBuildingsLines(double[] lon, double[] lat) {
         if(zoomLvl > 5) {
@@ -82,5 +82,17 @@ public class Pencil {
             this.gc.fillPolygon(lon, lat, lon.length);
             this.gc.strokePolygon(lon, lat, lon.length);
         }
+    }
+
+    /**
+     * Draw the waters lines
+     * @param lon       array of coordinates X
+     * @param lat       array of coordinates Y
+     */
+    private void drawWatersLines(double[] lon, double[] lat) {
+        if(zoomLvl > 5) this.gc.setLineWidth(2);
+        this.gc.setStroke(Color.LIGHTBLUE);
+        this.gc.strokePolygon(lon, lat, lon.length);
+        this.gc.setLineWidth(1);
     }
 }
