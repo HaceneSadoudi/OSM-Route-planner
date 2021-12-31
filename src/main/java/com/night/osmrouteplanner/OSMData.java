@@ -227,6 +227,19 @@ public class OSMData {
         stringToFile(sendRequest(query), DIRNAME + File.separator + city + File.separator + "InterestingNodes", ".xml");
     }
 
+    /**
+     * Generate all xml files
+     *
+     * @param city      Name of the city
+     */
+    public static void generateAllXMLs(String city) {
+        mkCityDir(city);
+        generateRoads(city);
+        generateBuildings(city);
+        generateParks(city);
+        generateWater(city);
+        generateInterestingNodes(city);
+    }
 
 }
 
