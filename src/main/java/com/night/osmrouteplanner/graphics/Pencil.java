@@ -95,4 +95,14 @@ public class Pencil {
         this.gc.strokePolygon(lon, lat, lon.length);
         this.gc.setLineWidth(1);
     }
+
+    /**
+     * Draw the waters fill
+     * @param lon       array of coordinates X
+     * @param lat       array of coordinates Y
+     */
+    private void drawWatersFill(double[] lon, double[] lat) {
+        this.gc.setFill(Color.LIGHTBLUE);
+        this.gc.fillPolygon(lon, lat, lon.length);
+    }
 }
