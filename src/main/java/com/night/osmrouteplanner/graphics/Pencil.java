@@ -115,4 +115,20 @@ public class Pencil {
         this.gc.setFill(Color.rgb(170, 210, 160));
         this.gc.fillPolygon(lon, lat, lon.length);
     }
+
+    /**
+     * Draw lines for roads with chosen color
+     *
+     * @param lon       array of coordinates X
+     * @param lat       array of coordinates Y
+     * @param color     chosen color
+     */
+    private void drawMainRoadsWithColor(double[] lon, double[] lat, Color color) {
+        if(zoomLvl <= 5) this.gc.setLineWidth(3);
+        else this.gc.setLineWidth(5);
+        this.gc.setStroke(color);
+        this.gc.strokePolygon(lon, lat, lon.length);
+        this.gc.setLineWidth(1);
+
+    }
 }
