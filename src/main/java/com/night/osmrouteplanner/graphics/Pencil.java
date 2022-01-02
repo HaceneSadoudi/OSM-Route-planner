@@ -105,4 +105,14 @@ public class Pencil {
         this.gc.setFill(Color.LIGHTBLUE);
         this.gc.fillPolygon(lon, lat, lon.length);
     }
+
+    /**
+     * Draw the parks contour
+     * @param lon
+     * @param lat
+     */
+    private void drawParksLines(double[] lon, double[] lat) {
+        this.gc.setFill(Color.rgb(170, 210, 160));
+        this.gc.fillPolygon(lon, lat, lon.length);
+    }
 }
