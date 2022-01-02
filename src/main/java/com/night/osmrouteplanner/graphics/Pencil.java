@@ -131,4 +131,14 @@ public class Pencil {
         this.gc.setLineWidth(1);
 
     }
+
+    /**
+     * Draw the primary roads
+     *
+     * @param lon       array with coordinate X
+     * @param lat       array with coordinate Y
+     */
+    private void drawPrimaryRoadsLines(double[] lon, double[] lat) {
+        drawMainRoadsWithColor(lon, lat, Color.rgb(253, 215,161));
+    }
 }
