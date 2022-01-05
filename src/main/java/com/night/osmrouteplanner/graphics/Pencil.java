@@ -161,4 +161,14 @@ public class Pencil {
     private void drawTertiaryRoadsLines(double[] lon, double[] lat) {
         drawMainRoadsWithColor(lon, lat, Color.rgb(255, 255, 255));
     }
+
+    /**
+     * Draw the trunk roads
+     *
+     * @param lon       array of coordinates X
+     * @param lat       array of coordinates Y
+     */
+    private void drawTrunkRoadsLines(double[] lon, double[] lat) {
+        drawMainRoadsWithColor(lon, lat, Color.rgb(250, 180, 160) );
+    }
 }
