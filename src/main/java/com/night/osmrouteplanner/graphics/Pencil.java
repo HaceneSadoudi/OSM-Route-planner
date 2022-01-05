@@ -141,4 +141,14 @@ public class Pencil {
     private void drawPrimaryRoadsLines(double[] lon, double[] lat) {
         drawMainRoadsWithColor(lon, lat, Color.rgb(253, 215,161));
     }
+
+    /**
+     * Draw the secondary roads
+     *
+     * @param lon
+     * @param lat
+     */
+    private void drawSecondaryRoadsLines(double[] lon, double[] lat) {
+       drawMainRoadsWithColor(lon , lat, Color.rgb(246, 250, 187));
+    }
 }
