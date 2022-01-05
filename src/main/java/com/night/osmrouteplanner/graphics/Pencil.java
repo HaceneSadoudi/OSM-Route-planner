@@ -182,4 +182,17 @@ public class Pencil {
     private void drawMotorwayRoadsLines(double[] lon, double[] lat) {
         drawMainRoadsWithColor(lon, lat, Color.rgb(235, 155, 160));
     }
+
+    /**
+     * Draw the other roads types contour
+     *
+     * @param lon
+     * @param lat
+     */
+    private void drawRoaodsLines(double[] lon, double[] lat) {
+        if(zoomLvl > 5) this.gc.setLineWidth(2);
+        this.gc.setStroke(Color.WHITE);
+        this.gc.strokePolygon(lon, lat, lon.length);
+        this.gc.setLineWidth(1);
+    }
 }
