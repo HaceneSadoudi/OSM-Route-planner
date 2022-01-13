@@ -22,19 +22,11 @@ public class Parser {
 
 
     void init(File data) {
-        try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(data);
-            doc.getDocumentElement().normalize();
-            listWay = doc.getElementsByTagName("way");
-            listRelation = doc.getElementsByTagName("relation");
-            listMember = doc.getElementsByTagName("member");
-            this.waysLatitude = new HashMap<>();
-            this.waysLongitude = new HashMap<>();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        listWay = getNodesByType(data, "way");
+        listRelation = getNodesByType(data,"relation");
+        listMember = getNodesByType(data,"member");
+        this.waysLatitude = new HashMap<>();
+        this.waysLongitude = new HashMap<>();
     }
 
     public NodeList getNodesByType(File file, String nodeType) {
@@ -44,7 +36,6 @@ public class Parser {
             Document doc = builder.parse(file);
             doc.getDocumentElement().normalize();
             return doc.getElementsByTagName(nodeType);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
