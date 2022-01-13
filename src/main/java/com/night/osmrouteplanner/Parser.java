@@ -36,4 +36,18 @@ public class Parser {
             e.printStackTrace();
         }
     }
+
+    public NodeList getNodesByType(File file, String nodeType) {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(file);
+            doc.getDocumentElement().normalize();
+            return doc.getElementsByTagName(nodeType);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
