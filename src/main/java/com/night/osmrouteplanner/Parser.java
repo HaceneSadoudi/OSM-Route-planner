@@ -100,5 +100,29 @@ public class Parser {
         this.waysLongitude = waysLongitude;
     }
 
+    public void parseParks(String city) {
+        NodeList listWay = getNodesByType(new File(OSMData.DIRNAME+File.separator+city+File.separator+"Parks.xml"), "way");
+        this.wayId = new long[listWay.getLength()];
+        for(int i=0;i<listWay.getLength();i++) {
+            Node node = listWay.item(i);
+
+            if(node.getNodeType() == Node.ELEMENT_NODE) {
+                List<Double> listLat = new ArrayList<>();
+                List<Double> listLon = new ArrayList<>();
+                Element element = (Element) node;
+                long id = Long.parseLong(element.getAttribute("id"));
+                this.wayId[i] = id;
+                for(int j=0;j<element.getElementsByTagName("nd").getLength();j++) {
+                    Node node1 = element.getElementsByTagName("nd").item(j);
+                    Element element1 = (Element) node1;
+                    listLat.add(Double.parseDouble(element1.getAttribute("lat")));
+                    listLon.add(Double.parseDouble(element1.getAttribute("lon")));
+                }
+                waysLatitude.put(id, listLat);
+                waysLongitude.put(id, listLon);
+            }
+        }
+    }
+
 
 }
