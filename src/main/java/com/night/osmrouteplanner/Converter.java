@@ -1,5 +1,7 @@
 package com.night.osmrouteplanner;
 
+import java.util.Enumeration;
+
 public class Converter {
 
     private double[] arrayOfLon;
@@ -21,5 +23,14 @@ public class Converter {
             double xPixel = 500 * ((arrayOfLat[i] + 180) / 360);
         }
         return lonX;
+    }
+
+    public double[] convertLat(double canvasH, double minLat) {
+        int nbrOfPoints = arrayOfLat.length;
+        double[] latY = new double[nbrOfPoints];
+        for(int i=0;i<=nbrOfPoints-1;i++) {
+
+        }
+        return latY;
     }
 }
